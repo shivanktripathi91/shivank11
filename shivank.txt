@@ -1,0 +1,84 @@
+#include <iostream>
+
+using namespace std;
+struct node{
+    int data;
+    node*next;
+}*start,*rear,*newptr;
+node*create(int n)
+{
+    node*ptr;
+    ptr=(struct node*)malloc(sizeof(struct node));
+    ptr->data=n;
+    ptr->next=NULL;
+    
+}
+
+void insert(node*np)
+{
+    if(start==NULL)
+    start=rear=np;
+    else
+    rear->next=np;
+    
+    rear=np;
+    
+    
+}
+void del(int n)
+{
+    node*ptr;
+ptr=start;
+ if(ptr->data==n)
+ {
+     start=ptr->next;
+     delete(ptr);
+ }
+ else 
+ {
+    node *curr;
+    node *prev;
+    prev=start;
+    curr=start->next;
+    while(curr->data!=n)
+    {
+        curr=curr->next;
+        prev=prev->next;
+    }
+     prev->next=curr->next;
+     delete(curr);
+     
+ }
+ 
+}
+void display()
+{
+    node*ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        cout<<ptr->data;
+        ptr=ptr->next;
+    }
+    
+}
+
+
+int main()
+{
+    start=rear=NULL;
+    int d;
+    for(int i=0;i<5;i++)
+    {
+        cin>>d;
+        newptr=create(d);
+        insert(newptr);
+        
+    }
+    display();
+    del(2);
+    cout<<endl;
+    display();
+    
+    return 0;
+}
